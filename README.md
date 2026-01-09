@@ -1,5 +1,3 @@
-Retail_Insights_assessment_blend360
-
 Retail Insights Assistant (GenAI + Multi-Agent System)
 
 Overview
