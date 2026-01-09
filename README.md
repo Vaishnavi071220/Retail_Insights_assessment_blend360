@@ -22,16 +22,20 @@ Core Capabilities
 Setup & Execution
 -----------------
 1. Install dependencies:
+```bash
    pip install -r requirements.txt
+```
 
-2. Configure environment variables:
+3. Configure environment variables:
    Create a .env file in the project root and add:
    GROQ_API_KEY=your_key_here
 
-3. Run the application:
-   streamlit run app.py
+4. Run the application:
+  ```bash
+ streamlit run app.py
+```
 
-4. Upload a CSV or Excel retail sales dataset (e.g., Amazon Sale Report)
+5. Upload a CSV or Excel retail sales dataset (e.g., Amazon Sale Report)
 
 Multi-Agent Architecture
 ------------------------
