@@ -1,24 +1,112 @@
-# Retail_Insights_assessment_blend360
+Retail_Insights_assessment_blend360
 
-# Retail Insights Assistant (Multi-Agent RAG)
+Retail Insights Assistant (GenAI + Multi-Agent System)
 
-## 🛠️ Setup & Execution
-1. Install dependencies: `pip install -r requirements.txt`
-2. Add your Groq API Key to a `.env` file: `GROQ_API_KEY=your_key_here`
-3. Run the application: `streamlit run app.py`
+Overview
+--------
+The Retail Insights Assistant is a GenAI-powered analytics application designed to help business users analyze retail sales data through executive summaries and natural language questions.
 
-## 🤖 Multi-Agent Design
-- **Query Resolution Agent:** Analyzes the DuckDB schema and conversation history to generate precise SQL.
-- **Data Extraction Agent:** Executes the SQL and manages the data connection.
-- **Validation Agent:** Acts as a quality gate, ensuring data exists before interpretation.
-- **Self-Correction Loop:** If the SQL fails, the agents automatically attempt a refinement step.
+The system combines a structured analytical data layer with a Groq-hosted LLM and a multi-agent architecture to deliver accurate, scalable, and decision-ready insights. This project was built as part of the Blend360 GenAI interview assessment.
 
-## 📝 Key Assumptions
-- The uploaded dataset follows a standard retail format (headers like Order ID, Date, Amount).
-- A standardized schema is created in DuckDB for consistent querying.
+Core Capabilities
+-----------------
+1. Summarization Mode
+- Generates concise executive-level summaries from retail sales data
+- Highlights top-performing categories, geographic performance, order status distribution, and key business insights
+- Provides actionable recommendations based on observed trends
 
-## 🚀 Scalability (100GB+ Strategy)
-[cite_start]To scale this system for 100GB+ datasets as per requirements [cite: 33-35]:
-1. [cite_start]**Cloud Migration:** Replace local DuckDB with **Google BigQuery** or **Snowflake**[cite: 41].
-2. **Metadata Layer:** Instead of full schema injection, use a vector-indexed metadata store to find relevant tables/columns.
-3. [cite_start]**Partitioning:** Utilize partitioned **Parquet** files in cloud storage (S3/GCS) to minimize data scanning[cite: 43].
+2. Conversational Q&A Mode
+- Allows users to ask ad-hoc business questions in natural language
+- Automatically translates questions into SQL queries
+- Returns data-backed answers along with business-friendly explanations
+- Maintains short-term conversational context for follow-up questions
+
+Setup & Execution
+-----------------
+1. Install dependencies:
+   pip install -r requirements.txt
+
+2. Configure environment variables:
+   Create a .env file in the project root and add:
+   GROQ_API_KEY=your_key_here
+
+3. Run the application:
+   streamlit run app.py
+
+4. Upload a CSV or Excel retail sales dataset (e.g., Amazon Sale Report)
+
+Multi-Agent Architecture
+------------------------
+The system uses a three-agent architecture aligned with the assignment requirements.
+
+Query Resolution Agent:
+- Interprets user intent using a large language model
+- Dynamically injects the DuckDB schema into prompts to prevent hallucinated columns
+- Generates safe, schema-aware SQL queries
+
+Data Extraction Agent:
+- Executes SQL queries against DuckDB
+- Ensures all heavy computation happens in the database layer
+
+Validation Agent:
+- Acts as a quality gate by validating query results
+- Handles empty or insufficient data scenarios gracefully
+- Prevents unsafe SQL operations
+
+Self-Correction Loop:
+- If SQL execution fails, the error is passed back to the LLM
+- The agent refines and retries the query automatically
+- Demonstrates true agentic interaction and system resilience
+
+Retrieval Strategy (RAG Explanation)
+-----------------------------------
+This system follows a hybrid retrieval approach.
+
+Structured Retrieval (Primary):
+- Retail sales data is structured and tabular
+- Retrieval is performed using SQL with metadata-based filtering and aggregation pushdown
+- This approach is efficient and avoids passing raw data to the LLM
+
+Semantic Retrieval (Optional Extension):
+- Vector-based retrieval (e.g., FAISS, Pinecone) can be added for unstructured data such as SOPs, KPI definitions, or pricing policies
+- Not required for this prototype because the core dataset is structured
+
+Scalability Strategy (100GB+ Design)
+-----------------------------------
+Although the prototype runs locally, it is designed to scale to large datasets.
+
+Data Engineering & Storage:
+- Raw data stored in a cloud data lake (S3, GCS, or Azure Data Lake)
+- Curated data written as partitioned Parquet or Delta tables
+- Batch ingestion handled via Spark, Databricks, or dbt
+
+Query & Retrieval Efficiency:
+- SQL pushdown to cloud data warehouses such as BigQuery or Snowflake
+- Partitioning by date, geography, and category
+- Use of pre-aggregated summary tables for frequent analytical queries
+
+LLM Orchestration:
+- LLM used only for intent understanding, SQL generation, and narrative summaries
+- Prompt templates and caching applied to control latency and cost
+
+Key Assumptions
+---------------
+- The dataset contains structured retail sales data with date, category, geography, and revenue fields
+- Regional groupings (North, South, East, West) are not explicitly defined unless provided
+- Year-over-year analysis depends on availability of multi-year data
+- All insights are strictly grounded in retrieved data to avoid hallucination
+
+Limitations & Future Enhancements
+---------------------------------
+- Add vector search for unstructured business documents
+- Introduce configurable region mappings
+- Persist long-term conversation memory
+- Add monitoring for accuracy, latency, and cost
+- Support real-time or streaming data ingestion
+
+Why This Design Works
+---------------------
+- Clean separation between data processing and LLM reasoning
+- Schema grounding and validation prevent hallucinations
+- SQL-based retrieval scales efficiently to large datasets
+- Produces executive-ready insights rather than raw metrics
