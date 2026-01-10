@@ -60,19 +60,6 @@ Self-Correction Loop:
 - The agent refines and retries the query automatically
 - Demonstrates true agentic interaction and system resilience
 
-Retrieval Strategy (RAG Explanation)
------------------------------------
-This system follows a hybrid retrieval approach.
-
-Structured Retrieval (Primary):
-- Retail sales data is structured and tabular
-- Retrieval is performed using SQL with metadata-based filtering and aggregation pushdown
-- This approach is efficient and avoids passing raw data to the LLM
-
-Semantic Retrieval (Optional Extension):
-- Vector-based retrieval (e.g., FAISS, Pinecone) can be added for unstructured data such as SOPs, KPI definitions, or pricing policies
-- Not required for this prototype because the core dataset is structured
-
 Scalability Strategy (100GB+ Design)
 -----------------------------------
 Although the prototype runs locally, it is designed to scale to large datasets.
