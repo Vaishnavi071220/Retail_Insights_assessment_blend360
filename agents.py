@@ -28,7 +28,7 @@ class QueryResolutionAgent:
 
     def refine(self, original_query, schema_info, error_msg, failed_sql):
         prompt = f"""
-You are fixing a DuckDB SQL query.
+We are fixing a DuckDB SQL query.
 
 Table name: sales
 
@@ -73,3 +73,4 @@ class ValidationAgent:
             return df.head(1000)
 
         return df
+
