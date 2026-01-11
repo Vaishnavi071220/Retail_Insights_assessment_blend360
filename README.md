@@ -26,11 +26,11 @@ Setup & Execution
    pip install -r requirements.txt
 ```
 
-3. Configure environment variables:
+2. Configure environment variables:
    Create a .env file in the project root and add:
    GROQ_API_KEY=your_key_here
 
-4. Run the application:
+3. Run the application:
   ```bash
  streamlit run app.py
 ```
@@ -39,7 +39,7 @@ Setup & Execution
 
 Multi-Agent Architecture
 ------------------------
-The system uses a three-agent architecture aligned with the assignment requirements.
+The system uses a three-agent architecture designed to meet the assignment criteria for Query Resolution, Extraction, and Validation.
 
 Query Resolution Agent:
 - Interprets user intent using a large language model
@@ -70,7 +70,7 @@ Data Engineering & Storage:
 - Batch ingestion handled via Spark, Databricks, or dbt
 
 Query & Retrieval Efficiency:
-- SQL pushdown to cloud data warehouses such as BigQuery or Snowflake
+- SQL pushdown to cloud data warehouses like DuckDB for prototype, Snowflake/BigQuery for production
 - Partitioning by date, geography, and category
 - Use of pre-aggregated summary tables for frequent analytical queries
 
