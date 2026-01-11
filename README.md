@@ -35,7 +35,7 @@ Setup & Execution
  streamlit run app.py
 ```
 
-5. Upload a CSV or Excel retail sales dataset (e.g., Amazon Sale Report)
+4. Upload a CSV or Excel retail sales dataset (e.g., Amazon Sale Report)
 
 Multi-Agent Architecture
 ------------------------
