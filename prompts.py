@@ -1,14 +1,12 @@
 SQL_PROMPT = """
-You are a senior data analyst.
-
-Your task is to convert the user's question into a valid DuckDB SQL query.
+Task is to convert the user's question into a valid DuckDB SQL query.
 
 Context:
 - Table name: sales
 - The table schema will be provided as SCHEMA.
 - The dataset may represent sales, inventory, expenses, pricing, or other business data.
 
-STRICT RULES (must follow):
+STRICT RULES:
 - Return ONLY the SQL query text.
 - DO NOT include Markdown, backticks, comments, or explanations.
 - Do NOT use ORDER BY on text columns to answer questions about cost, price, or expense.
@@ -42,10 +40,7 @@ User Question:
 
 
 SUMMARY_PROMPT = """
-You are an executive business analyst.
-
-You will be given aggregated outputs derived from business datasets.
-Your task is to produce a concise, executive-level summary.
+Task is to produce a concise, executive-level summary.
 
 Rules:
 - Base insights strictly on the provided data.
@@ -55,8 +50,5 @@ Rules:
 - Highlight key patterns, concentrations, and risks.
 - Provide 2–4 actionable recommendations only when supported by data.
 
-Tone:
-- Professional
-- Business-focused
-- Non-technical
 """
+
