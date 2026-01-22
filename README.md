@@ -4,7 +4,7 @@ Overview
 --------
 The Retail Insights Assistant is a GenAI-powered analytics application designed to help business users analyze retail sales data through executive summaries and natural language questions.
 
-The system combines a structured analytical data layer with a Groq-hosted LLM and a multi-agent architecture to deliver accurate, scalable, and decision-ready insights. This project was built as part of the Blend360 GenAI interview assessment.
+The system combines a structured analytical data layer with a Groq-hosted LLM and a multi-agent architecture to deliver accurate, scalable, and decision-ready insights. 
 
 Core Capabilities
 -----------------
